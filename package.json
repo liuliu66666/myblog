@@ -1,0 +1,50 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "cross-env UMI_UI=none umi dev",
+    "build": "umi build",
+    "build:analyze": "cross-env ANALYZE=1 umi build",
+    "test": "umi test",
+    "lint": "eslint {src,mock,tests}/**/*.{js,jsx} --fix"
+  },
+  "checkFiles": [
+    "src/**/*.js*",
+    "src/**/*.jsx*",
+    "src/**/*.less",
+    "config/**/*.js*"
+  ],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
+  "dependencies": {
+    "@ant-design/icons": "^4.0.0",
+    "antd": "^4.6.1",
+    "classnames": "^2.2.6",
+    "cross-env": "^7.0.2",
+    "dva": "^2.6.0-beta.6",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "umi-request": "^1.2.19"
+  },
+  "devDependencies": {
+    "@umijs/fabric": "^2.0.8",
+    "@umijs/preset-react": "^1.5.10",
+    "babel-eslint": "^9.0.0",
+    "concurrently": "^5.2.0",
+    "eslint": "^5.4.0",
+    "eslint-config-umi": "^1.4.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "prettier": "^2.0.5",
+    "react-test-renderer": "^16.7.0",
+    "umi": "^3.2.16"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
