@@ -1,17 +1,17 @@
 // @ts-nocheck
 import { plugin } from './plugin';
-import * as Plugin_0 from '/Users/dengyunlong/Desktop/project/myblog/blog/src/app.js';
-import * as Plugin_1 from '/Users/dengyunlong/Desktop/project/myblog/blog/src/.umi/plugin-dva/runtime.tsx';
+import * as Plugin_0 from '/Users/dengyunlong/Desktop/project/myblog/src/app.js';
+import * as Plugin_1 from '/Users/dengyunlong/Desktop/project/myblog/src/.umi/plugin-dva/runtime.tsx';
 import * as Plugin_2 from '../plugin-initial-state/runtime';
 import * as Plugin_3 from '../plugin-model/runtime';
 
   plugin.register({
     apply: Plugin_0,
-    path: '/Users/dengyunlong/Desktop/project/myblog/blog/src/app.js',
+    path: '/Users/dengyunlong/Desktop/project/myblog/src/app.js',
   });
   plugin.register({
     apply: Plugin_1,
-    path: '/Users/dengyunlong/Desktop/project/myblog/blog/src/.umi/plugin-dva/runtime.tsx',
+    path: '/Users/dengyunlong/Desktop/project/myblog/src/.umi/plugin-dva/runtime.tsx',
   });
   plugin.register({
     apply: Plugin_2,

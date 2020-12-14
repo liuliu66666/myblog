@@ -4,8 +4,8 @@ import '@@/core/devScripts';
 import { plugin } from './core/plugin';
 import './core/pluginRegister';
 import { createHistory } from './core/history';
-import { ApplyPluginsType } from '/Users/dengyunlong/Desktop/project/myblog/blog/node_modules/@umijs/runtime';
-import { renderClient } from '/Users/dengyunlong/Desktop/project/myblog/blog/node_modules/@umijs/renderer-react/dist/index.js';
+import { ApplyPluginsType } from '/Users/dengyunlong/Desktop/project/myblog/node_modules/@umijs/runtime';
+import { renderClient } from '/Users/dengyunlong/Desktop/project/myblog/node_modules/@umijs/renderer-react/dist/index.js';
 import { getRoutes } from './core/routes';
 
 
@@ -24,7 +24,7 @@ const getClientRender = (args: { hot?: boolean; routes?: any[] } = {}) => plugin
         history: createHistory(args.hot),
         isServer: process.env.__IS_SERVER,
         rootElement: 'root',
-        defaultTitle: `Hi，我是刘昌陇`,
+        defaultTitle: `jmgo`,
       },
     });
     return renderClient(opts);

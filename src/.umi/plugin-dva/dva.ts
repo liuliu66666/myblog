@@ -3,9 +3,9 @@ import { Component } from 'react';
 import { ApplyPluginsType } from 'umi';
 import dva from 'dva';
 // @ts-ignore
-import createLoading from '/Users/dengyunlong/Desktop/project/myblog/blog/node_modules/dva-loading/dist/index.esm.js';
+import createLoading from '/Users/dengyunlong/Desktop/project/myblog/node_modules/dva-loading/dist/index.esm.js';
 import { plugin, history } from '../core/umiExports';
-import ModelGlobal0 from '/Users/dengyunlong/Desktop/project/myblog/blog/src/models/global.js';
+import ModelGlobal0 from '/Users/dengyunlong/Desktop/project/myblog/src/models/global.js';
 
 let app:any = null;
 

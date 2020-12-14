@@ -1,7 +1,7 @@
 import proxy from './proxy';
 
 export default {
-  title: 'Hi，我是刘昌陇',
+  title: 'jmgo',
   // history: { type: 'hash' },
   hash: true,
   runtimePublicPath: false,
