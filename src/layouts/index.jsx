@@ -67,7 +67,11 @@ const BasicLayout = ({ dispatch, children, location }) => {
           </Sider>
           <Layout>
             <Content style={{ margin: "0 16px" }}>
-              <div style={{ padding: 24, minHeight: 360, backgroundColor: '#fff' }}>{children}</div>
+              <div
+                style={{ padding: 24, minHeight: 360, backgroundColor: "#fff" }}
+              >
+                {children}
+              </div>
             </Content>
           </Layout>
         </Layout>

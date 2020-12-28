@@ -1,21 +1,13 @@
-import { devLogin, getUserInfo, getToken } from '@/services/global';
+import { getNhData } from "@/services/global";
 
 const globalModel = {
-  namespace: 'global',
+  namespace: "global",
 
   state: {},
 
   effects: {
-    *getToken(_, { call, put }) {
-      return yield call(getToken);
-    },
-    
-    *devLogin(_, { call, put }) {
-      yield call(devLogin);
-    },
-
-    *getUserInfo(_, { call, put }) {
-      return yield call(getUserInfo);
+    *getNhData({ payload }, { call, put }) {
+      return yield call(getNhData, { ...payload });
     },
   },
 

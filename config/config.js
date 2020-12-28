@@ -1,16 +1,20 @@
-import proxy from './proxy';
-
 export default {
-  title: 'jmgo',
+  title: "jmgo",
   // history: { type: 'hash' },
   hash: true,
   runtimePublicPath: false,
-  publicPath: '/',
-  outputPath: 'build',
+  publicPath: "/",
+  outputPath: "build",
   targets: {
     ie: 11,
   },
   dva: {},
   antd: {},
-  proxy: proxy['dev'],
+  proxy: {
+    "/portal": {
+      target: "https://b2c.csair.com",
+      changeOrigin: true,
+      secure: false,
+    },
+  },
 };

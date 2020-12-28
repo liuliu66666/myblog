@@ -9,35 +9,42 @@ import {
   Divider,
   Button,
   Space,
+  Card,
+  Modal,
+  message,
 } from "antd";
 import { SendOutlined, SaveOutlined } from "@ant-design/icons";
-import BraftEditor from "braft-editor";
 
-import "braft-editor/dist/index.css";
+import RenderMarkdown from "@/components/RenderMarkdown";
+
+import { isEmpty } from "@/utils/utils";
 
 import styles from "./index.less";
 
 const OPTIONS = ["Apples", "Nails", "Bananas", "Helicopters"];
-const controls = [
-  "bold",
-  "italic",
-  "underline",
-  "text-color",
-  "separator",
-  "link",
-  "separator",
-  "media",
-];
-
-const { Search } = Input;
+const { Search, TextArea } = Input;
 const { Option } = Select;
 
 const Write = () => {
   const [form] = Form.useForm();
+  const [isShow, setShow] = useState(false);
+  const [ctContent, setContent] = useState("");
 
   const onFinish = (values) => {
     console.log("=========", values);
-    console.log('====????',values.content.toHTML())
+    console.log("====????", values.content.toHTML());
+  };
+
+  const onPreview = () => {
+    const ct = form.getFieldValue("content");
+    if (isEmpty(ct)) {
+      message.warning("请先输入正文");
+    } else {
+      setContent(ct);
+      setTimeout(() => {
+        setShow(true);
+      }, 300);
+    }
   };
 
   return (
@@ -98,23 +105,27 @@ const Write = () => {
             <Form.Item
               label="文章正文"
               name="content"
-              rules={[
-                {
-                  required: true,
-                  validator: (_, value, callback) => {
-                    if (value.isEmpty()) {
-                      callback("请输入正文内容");
-                    } else {
-                      callback();
-                    }
-                  },
-                },
-              ]}
+              rules={[{ required: true, message: "请输入正文内容" }]}
             >
-              <BraftEditor
-                className={styles.articleEdit}
-                placeholder="请输入正文内容"
-              />
+              <Card
+                title={<h4>MARKDOWN</h4>}
+                size="small"
+                extra={
+                  <Button size="small" type="link" onClick={onPreview}>
+                    预览
+                  </Button>
+                }
+              >
+                <TextArea
+                  placeholder="请输入正文内容"
+                  style={{
+                    fontSize: 16,
+                    fontFamily: null,
+                    backgroundColor: "#f8f8f8",
+                  }}
+                  autoSize={{ minRows: 20, maxRows: 20 }}
+                />
+              </Card>
             </Form.Item>
           </Col>
         </Row>
@@ -131,6 +142,33 @@ const Write = () => {
           </Button>
         </Space>
       </div>
+      <Modal
+        title="预览"
+        centered
+        width={1000}
+        visible={isShow}
+        destroyOnClose={true}
+        forceRender={true}
+        maskClosable={false}
+        closable={false}
+        bodyStyle={{ padding: 0 }}
+        footer={
+          <Button type="primary" onClick={() => setShow(false)}>
+            关闭
+          </Button>
+        }
+      >
+        <div
+          style={{
+            width: "100%",
+            height: "80vh",
+            overflowY: "auto",
+            padding: 20,
+          }}
+        >
+          <RenderMarkdown value={ctContent} />
+        </div>
+      </Modal>
     </div>
   );
 };

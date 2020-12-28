@@ -1,28 +1,27 @@
-@import '~antd/es/style/themes/default.less';
+@import "~antd/es/style/themes/default.less";
 @font-face {
-  font-family: 'regular';
-  src: url('./assets/font/regular.ttf');
+  font-family: "regular";
+  src: url("./assets/font/regular.ttf");
   font-style: normal;
   font-weight: bold;
 }
 @font-face {
-  font-family: 'blod';
-  src: url('./assets/font/blod.ttf');
+  font-family: "blod";
+  src: url("./assets/font/blod.ttf");
   font-style: normal;
   font-weight: bold;
 }
-
 
 html,
 body,
 #root {
   height: 100%;
-  font-family: 'regular';
+  font-family: "regular";
   background-color: #f5f5f5;
 }
 
 body {
-  cursor: url('./assets/images/cursor.png'),auto;
+  cursor: url("./assets/images/cursor.png"), auto;
 }
 
 ul,
@@ -32,6 +31,18 @@ ol {
 
 textarea {
   resize: none;
+}
+
+blockquote {
+  font: 14px/22px normal helvetica, sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  border-left: 3px solid #ccc;
+  background-color: #f1f1f1;
 }
 
 body {
@@ -71,14 +82,15 @@ p {
 }
 
 @keyframes textPopup {
-  0%, 100% {
-      opacity: 0;
+  0%,
+  100% {
+    opacity: 0;
   }
   5% {
-      opacity: 1;
+    opacity: 1;
   }
   100% {
-      transform: translateY(-50px);    
+    transform: translateY(-50px);
   }
 }
 

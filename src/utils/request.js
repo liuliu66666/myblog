@@ -57,31 +57,9 @@ const request = extend({
 request.interceptors.request.use(async (url, options) => {
   const { headers = {} } = options;
 
-  let userInfo = sessionStorage['userInfo'];
-  let token = sessionStorage['token'];
-
-  if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
-  }
-
-  let customizeCode = undefined;
-
-  if (userInfo) {
-    const { EXTEND_USER_ID, operatorid, roleList, empname } = JSON.parse(userInfo);
-    customizeCode = btoa(
-      JSON.stringify({
-        EXTEND_USER_ID,
-        operatorid,
-        roleList,
-        empname: encodeURIComponent(empname),
-      }),
-    );
-  }
-
   const new_headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json; charset=utf-8;',
-    'user-string': customizeCode || '',
     ...headers,
   };
 
