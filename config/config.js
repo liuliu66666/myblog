@@ -11,8 +11,8 @@ export default {
   dva: {},
   antd: {},
   proxy: {
-    "/portal": {
-      target: "https://b2c.csair.com",
+    "/api": {
+      target: "http://172.18.19.83:5000",
       changeOrigin: true,
       secure: false,
     },

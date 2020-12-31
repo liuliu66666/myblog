@@ -5,7 +5,8 @@ import dva from 'dva';
 // @ts-ignore
 import createLoading from '/Users/dengyunlong/Desktop/project/myblog/node_modules/dva-loading/dist/index.esm.js';
 import { plugin, history } from '../core/umiExports';
-import ModelGlobal0 from '/Users/dengyunlong/Desktop/project/myblog/src/models/global.js';
+import ModelIndex0 from '/Users/dengyunlong/Desktop/project/myblog/src/models/admin/index.js';
+import ModelGlobal1 from '/Users/dengyunlong/Desktop/project/myblog/src/models/global.js';
 
 let app:any = null;
 
@@ -29,7 +30,8 @@ export function _onCreate(options = {}) {
   (runtimeDva.plugins || []).forEach((plugin:any) => {
     app.use(plugin);
   });
-  app.model({ namespace: 'global', ...ModelGlobal0 });
+  app.model({ namespace: 'index', ...ModelIndex0 });
+app.model({ namespace: 'global', ...ModelGlobal1 });
   return app;
 }
 

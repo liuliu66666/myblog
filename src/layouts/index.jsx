@@ -13,8 +13,12 @@ const { Content, Sider } = Layout;
 
 const BasicLayout = ({ dispatch, children, location }) => {
   const { pathname } = location;
-
   let adminMenuKey = "1";
+
+  if (pathname.indexOf("login") !== -1) {
+    return children;
+  }
+
   if (pathname.indexOf("admin") !== -1) {
     let item = adminMenu.find((u) => `${u.path}` === `${pathname}`);
     item && (adminMenuKey = `${item.id}`);
@@ -47,13 +51,9 @@ const BasicLayout = ({ dispatch, children, location }) => {
           <footer className={styles.footer}></footer>
         </div>
       ) : (
-        <Layout style={{ minHeight: "100vh" }}>
+        <Layout>
           <Sider collapsible>
-            <Menu
-              theme="dark"
-              defaultSelectedKeys={[adminMenuKey]}
-              mode="inline"
-            >
+            <Menu theme="dark" selectedKeys={[adminMenuKey]} mode="inline">
               {adminMenu.map((u) => (
                 <Menu.Item
                   key={u.id}
@@ -66,12 +66,8 @@ const BasicLayout = ({ dispatch, children, location }) => {
             </Menu>
           </Sider>
           <Layout>
-            <Content style={{ margin: "0 16px" }}>
-              <div
-                style={{ padding: 24, minHeight: 360, backgroundColor: "#fff" }}
-              >
-                {children}
-              </div>
+            <Content className={styles.adminContent}>
+              <div className={styles.adminContentBox}>{children}</div>
             </Content>
           </Layout>
         </Layout>

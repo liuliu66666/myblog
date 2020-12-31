@@ -11,6 +11,11 @@ export function getRoutes() {
     "component": require('@/layouts/index.jsx').default,
     "routes": [
       {
+        "path": "/admin/articlelist/ArtCard",
+        "exact": true,
+        "component": require('@/pages/admin/articlelist/ArtCard.jsx').default
+      },
+      {
         "path": "/admin/articlelist",
         "exact": true,
         "component": require('@/pages/admin/articlelist/index.jsx').default

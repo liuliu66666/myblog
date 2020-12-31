@@ -1,5 +1,5 @@
 .writeMain {
-  [class*='tagsAddBox'] {
+  [class*="tagsAddBox"] {
     padding: 8px;
   }
   .articleEdit {
@@ -9,5 +9,27 @@
   }
   .footerBtns {
     text-align: center;
+  }
+
+  .uploadImg {
+    margin: 0 0 27px 80px;
+    width: 200px;
+    height: 125px;
+    background-color: rgba(18, 18, 18, 0.02);
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    img {
+      object-fit: cover;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 100%;
+      width: 100%;
+      -o-object-fit: cover;
+      object-fit: cover;
+      -webkit-transform: translate3d(-50%, -50%, 0);
+      transform: translate3d(-50%, -50%, 0);
+    }
   }
 }
