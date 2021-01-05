@@ -1,51 +1,62 @@
 import React, { useState, useEffect } from "react";
-import { Skeleton, Row, Col, Card } from "antd";
-import { history } from 'umi'
+import { Skeleton, Row, Col, Card, Tag, Space } from "antd";
+import { history } from "umi";
+import { connect } from "dva";
+
+import { isEmpty } from "@/utils/utils";
+
 import styles from "./index.less";
 
 const { Meta } = Card;
 
-const testData = [];
+const Home = ({ dispatch, articleStore, searching }) => {
+  const { articlelist } = articleStore;
 
-(function mockData() {
-  for (let i = 0; i < 50; i++) {
-    testData.push({
-      id: i + 1,
-      coverImg: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
-      title: `标题${i + 1}`,
-      content: `内容${i + 1}`.repeat(10),
-      tags: ['222','333']
-    });
-  }
-})();
+  useEffect(() => {
+    dispatch({ type: "articleStore/getArticleList" });
+  }, []);
 
-const Home = () => {
-  const renderCard = (arr = []) => {
-    return arr.map((u) => (
-      <Col key={u.id} span={6} style={{ marginBottom: 20 }}>
-        <Card
-          hoverable
-          onClick={() => history.push(`/article?id=${u.id}`)}
-          style={{ width: "100%" }}
-          cover={
-            <div className={styles.artImgBox}>
-              <img alt={u.title} src={u.coverImg} />
-            </div>
-          }
-        >
-          <Meta title={u.title} description={u.content} />
-        </Card>
-      </Col>
-    ));
+  const renderCard = (arr = null) => {
+    if (arr === null) {
+      return <Skeleton active />;
+    } else if (!arr.length) {
+      return <Result status="404" title="暂无数据" />;
+    } else {
+      return arr.map((u) => {
+        let tagDom = <div />;
+        if (!isEmpty(u.tags)) {
+          tagDom = JSON.parse(u.tags).map((o, i) => <Tag color="#87d068" key={i}>{o}</Tag>);
+        }
+        return (
+          <Col key={u.id} span={6} style={{ marginBottom: 20 }}>
+            <Card
+              hoverable
+              onClick={() => history.push(`/article?id=${u.id}`)}
+              style={{ width: "100%" }}
+              cover={
+                <div className={styles.artImgBox}>
+                  <img alt={u.title} src={u.coverUrl} />
+                </div>
+              }
+            >
+              <Meta title={u.title} description={<Space>{tagDom}</Space>} />
+            </Card>
+          </Col>
+        );
+      });
+    }
   };
 
   return (
     <div className={styles.homeMain}>
       <Skeleton paragraph={{ rows: 10 }} title={false} loading={false}>
-        <Row gutter={16}>{renderCard(testData)}</Row>
+        <Row gutter={16}>{renderCard(articlelist)}</Row>
       </Skeleton>
     </div>
   );
 };
 
-export default Home;
+export default connect(({ articleStore, loading }) => ({
+  articleStore,
+  searching: loading.effects["articleStore/getArticleList"],
+}))(Home);

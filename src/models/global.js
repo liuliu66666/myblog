@@ -1,4 +1,4 @@
-import { getNhData } from "@/services/global";
+import { onLogin } from "@/services/global";
 
 const globalModel = {
   namespace: "global",
@@ -6,8 +6,8 @@ const globalModel = {
   state: {},
 
   effects: {
-    *getNhData({ payload }, { call, put }) {
-      return yield call(getNhData, { ...payload });
+    *onLogin({ payload }, { call, put }) {
+      return yield call(onLogin, { ...payload });
     },
   },
 

@@ -6,7 +6,8 @@ import dva from 'dva';
 import createLoading from '/Users/dengyunlong/Desktop/project/myblog/node_modules/dva-loading/dist/index.esm.js';
 import { plugin, history } from '../core/umiExports';
 import ModelIndex0 from '/Users/dengyunlong/Desktop/project/myblog/src/models/admin/index.js';
-import ModelGlobal1 from '/Users/dengyunlong/Desktop/project/myblog/src/models/global.js';
+import ModelAritcle1 from '/Users/dengyunlong/Desktop/project/myblog/src/models/blog/aritcle.js';
+import ModelGlobal2 from '/Users/dengyunlong/Desktop/project/myblog/src/models/global.js';
 
 let app:any = null;
 
@@ -31,7 +32,8 @@ export function _onCreate(options = {}) {
     app.use(plugin);
   });
   app.model({ namespace: 'index', ...ModelIndex0 });
-app.model({ namespace: 'global', ...ModelGlobal1 });
+app.model({ namespace: 'aritcle', ...ModelAritcle1 });
+app.model({ namespace: 'global', ...ModelGlobal2 });
   return app;
 }
 

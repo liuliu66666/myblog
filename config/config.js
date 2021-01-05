@@ -10,6 +10,9 @@ export default {
   },
   dva: {},
   antd: {},
+  theme: {
+    "@primary-color": "#1DA57A",
+  },
   proxy: {
     "/api": {
       target: "http://172.18.19.83:5000",

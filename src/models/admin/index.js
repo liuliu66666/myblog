@@ -13,7 +13,7 @@ const dataModel = {
   namespace: "adminstore",
 
   state: {
-    articlelist: [],
+    articlelist: null,
   },
 
   effects: {

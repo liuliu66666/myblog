@@ -81,7 +81,7 @@ const Write = ({ dispatch, stashing, searching, submiting, location }) => {
       if (res.status === 200) {
         message.success("发布成功");
       } else {
-        message.error(res.msg);
+        message.error(res.msg || "发布失败");
       }
     });
   };
@@ -134,6 +134,10 @@ const Write = ({ dispatch, stashing, searching, submiting, location }) => {
   // 暂存
   const onStash = () => {
     const result = form.getFieldValue();
+    if (isEmpty(result.title)) {
+      message.info("标题至少你得填吧");
+      return false;
+    }
     let params = {
       id: artId,
       title: "",
@@ -155,7 +159,7 @@ const Write = ({ dispatch, stashing, searching, submiting, location }) => {
       if (res.status === 200) {
         message.success("暂存成功");
       } else {
-        message.error("暂存失败");
+        message.error(res.msg || "暂存失败");
       }
     });
   };
@@ -193,6 +197,7 @@ const Write = ({ dispatch, stashing, searching, submiting, location }) => {
               >
                 <Select
                   mode="multiple"
+                  maxTagCount={2}
                   placeholder="请选择标签"
                   style={{ width: "100%" }}
                   getPopupContainer={false}

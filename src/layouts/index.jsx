@@ -11,7 +11,7 @@ import styles from "./index.less";
 
 const { Content, Sider } = Layout;
 
-const BasicLayout = ({ dispatch, children, location }) => {
+const BasicLayout = ({ children, location }) => {
   const { pathname } = location;
   let adminMenuKey = "1";
 
@@ -24,6 +24,10 @@ const BasicLayout = ({ dispatch, children, location }) => {
     item && (adminMenuKey = `${item.id}`);
   }
 
+  const navTo = (url) => {
+    history.push(url);
+  };
+
   return (
     <ConfigProvider locale={zhCN}>
       {pathname.indexOf("admin") === -1 ? (
@@ -32,8 +36,8 @@ const BasicLayout = ({ dispatch, children, location }) => {
             <div className={styles.bannerBox}>
               <nav className={styles.navBox}>
                 <ul className={styles.menuBox}>
-                  <li>首页</li>
-                  <li>留言</li>
+                  <li onClick={() => navTo("/home")}>首页</li>
+                  <li onClick={() => navTo("/home")}>留言</li>
                 </ul>
               </nav>
               <div className={styles.bannerBg}>

@@ -1,44 +1,68 @@
 import React, { useState, useEffect } from "react";
-import { Skeleton, Typography, Space } from "antd";
-import {
-  CalendarOutlined,
-  UserOutlined,
-  FileTextOutlined,
-} from "@ant-design/icons";
+import { Skeleton, Typography, Space, Tag } from "antd";
+import { CalendarOutlined, UserOutlined } from "@ant-design/icons";
+import moment from "moment";
+import { connect } from "dva";
+
+import RenderMarkdown from "@/components/RenderMarkdown";
+
+import { isEmpty } from "@/utils/utils";
+
 import styles from "./index.less";
 
 const { Title } = Typography;
 
-const Article = () => {
-  
+const Article = ({ dispatch, articleStore, location, searching }) => {
+  const { articleData } = articleStore;
+  let tagDom = <div />;
   useEffect(() => {
-    let dom = document.getElementById('article-page')
-    dom.scrollIntoView()
-  }, [])
+    const { query } = location;
+    let dom = document.getElementById("article-page");
+    setTimeout(() => {
+      dom.scrollIntoView();
+    }, 100);
+
+    dispatch({
+      type: "articleStore/getArticle",
+      payload: { id: query.id },
+    });
+  }, []);
+
+  if (!isEmpty(articleData.tags)) {
+    tagDom = JSON.parse(articleData.tags).map((o, i) => (
+      <Tag color="cyan" key={i}>
+        {o}
+      </Tag>
+    ));
+  }
 
   return (
-    <div className={styles.articleMain} id='article-page'>
+    <div className={styles.articleMain} id="article-page">
       <div className={styles.topBox}>
-        <Title level={2}>h2. Ant Design</Title>
+        <Title level={2}>{articleData?.title || "--"}</Title>
         <Space direction="horizontal" size="large" split={<span>|</span>}>
           <span>
-            <CalendarOutlined /> 2020-02-12
+            <CalendarOutlined />{" "}
+            {!isEmpty(articleData.createTime)
+              ? moment(articleData.createTime).format("YYYY-MM-DD HH:mm:ss")
+              : "--"}
           </span>
           <span>
-            <UserOutlined /> xxx
+            <UserOutlined /> {articleData?.author || "--"}
           </span>
-          <span>
-            <FileTextOutlined /> 字数统计 2345
-          </span>
+          <span>{tagDom}</span>
         </Space>
-        <Skeleton paragraph={{ rows: 20 }} loading={true}>
-          <div className={styles.contentMian}>
-            {`内容他`.repeat(100)}
-          </div>
-        </Skeleton>
       </div>
+      <Skeleton paragraph={{ rows: 20 }} loading={searching}>
+        <div className={styles.contentMian}>
+          <RenderMarkdown value={articleData.content} />
+        </div>
+      </Skeleton>
     </div>
   );
 };
 
-export default Article;
+export default connect(({ articleStore, loading }) => ({
+  articleStore,
+  searching: loading.effects["articleStore/getArticle"],
+}))(Article);

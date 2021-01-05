@@ -1,5 +1,6 @@
 import { extend } from "umi-request";
 import { notification } from "antd";
+import { history } from "umi";
 
 const codeMessage = {
   200: "服务器成功返回请求的数据。",
@@ -28,7 +29,7 @@ const errorHandler = (error) => {
     const errorText = codeMessage[response.status] || response.statusText;
     if (response.status === 401) {
       // 登录失效
-      // sessionStorage.clear();
+      history.replace("/login");
     }
     const { status, url } = response;
 
@@ -64,6 +65,12 @@ request.interceptors.request.use(async (url, options) => {
   };
 
   return { url, options: { ...options, headers: { ...new_headers } } };
+});
+
+// 响应拦截
+// response拦截器, 处理response
+request.interceptors.response.use((response, options) => {
+  return response;
 });
 
 export default request;

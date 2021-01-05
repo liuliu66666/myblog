@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { Space, Divider, Modal, message, Result } from "antd";
+import { Space, Divider, Modal, message, Result, Spin, Skeleton } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import QueueAnim from 'rc-queue-anim';
 import { connect } from "dva";
 import { history } from "umi";
 import moment from "moment";
@@ -11,7 +12,7 @@ import { isEmpty } from "@/utils/utils";
 
 const { confirm } = Modal;
 
-const ArticleList = ({ dispatch, adminstore }) => {
+const ArticleList = ({ dispatch, adminstore, stashing }) => {
   const { articlelist } = adminstore;
 
   useEffect(() => {
@@ -83,8 +84,10 @@ const ArticleList = ({ dispatch, adminstore }) => {
     });
   };
 
-  const renderList = (arr) => {
-    if (isEmpty(arr)) {
+  const renderList = (arr = null) => {
+    if (arr === null) {
+      return <Skeleton active />;
+    } else if (!arr.length) {
       return <Result status="404" title="暂无数据" />;
     } else {
       return (
@@ -107,7 +110,11 @@ const ArticleList = ({ dispatch, adminstore }) => {
     }
   };
 
-  return <div>{renderList(articlelist)}</div>;
+  return (
+    <Spin spinning={!!stashing}>
+      <div>{renderList(articlelist)}</div>
+    </Spin>
+  );
 };
 
 export default connect(
