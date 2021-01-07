@@ -6,7 +6,6 @@ import {
   Row,
   Col,
   Select,
-  Divider,
   Button,
   Space,
   Modal,
@@ -23,7 +22,7 @@ import { isEmpty } from "@/utils/utils";
 
 import styles from "./index.less";
 
-const { Search, TextArea } = Input;
+const { TextArea } = Input;
 const { Option } = Select;
 
 const Write = ({ dispatch, stashing, searching, submiting, location }) => {
@@ -32,7 +31,6 @@ const Write = ({ dispatch, stashing, searching, submiting, location }) => {
   const [artId, setArtId] = useState(null);
   const [isShow, setShow] = useState(false);
   const [ctContent, setContent] = useState("");
-  const [tagValue, setTagValue] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [tagsData, setTagsData] = useState([]);
 
@@ -64,7 +62,6 @@ const Write = ({ dispatch, stashing, searching, submiting, location }) => {
   const getTags = () => {
     dispatch({ type: "adminstore/getTags" }).then(({ result }) => {
       setTagsData(result || []);
-      setTagValue("");
     });
   };
 
@@ -110,24 +107,6 @@ const Write = ({ dispatch, stashing, searching, submiting, location }) => {
       setTimeout(() => {
         setShow(true);
       }, 300);
-    }
-  };
-
-  // 新增标签
-  const onAddTags = () => {
-    if (!isEmpty(tagValue)) {
-      dispatch({
-        type: "adminstore/onAddTags",
-        payload: {
-          text: tagValue,
-        },
-      }).then((res) => {
-        if (res.status === 200) {
-          getTags();
-        } else {
-          message.error(res.msg || "新增失败");
-        }
-      });
     }
   };
 
@@ -201,32 +180,6 @@ const Write = ({ dispatch, stashing, searching, submiting, location }) => {
                   placeholder="请选择标签"
                   style={{ width: "100%" }}
                   getPopupContainer={false}
-                  onDropdownVisibleChange={() => setTagValue("")}
-                  dropdownRender={(menu) => (
-                    <div>
-                      {menu}
-                      <Divider style={{ margin: "4px 0" }} />
-                      <div style={{ padding: 8 }}>
-                        <Input
-                          autoComplete="off"
-                          onChange={({ target }) => setTagValue(target.value)}
-                          value={tagValue}
-                          placeholder="请添加标签"
-                          maxLength={10}
-                          allowClear
-                          addonAfter={
-                            <Button
-                              size="small"
-                              type="primary"
-                              onClick={onAddTags}
-                            >
-                              添加
-                            </Button>
-                          }
-                        />
-                      </div>
-                    </div>
-                  )}
                 >
                   {tagsData.map((u) => (
                     <Option key={u.id} value={u.text}>

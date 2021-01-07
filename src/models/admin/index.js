@@ -7,6 +7,7 @@ import {
   onDeleteArticle,
   getArticleDetail,
   onPublishArticle,
+  onDeleteTag,
 } from "@/services/admin";
 
 const dataModel = {
@@ -44,6 +45,11 @@ const dataModel = {
     // 新增标签
     *onAddTags({ payload }, { call, put }) {
       return yield call(onAddTags, { ...payload });
+    },
+
+    // 删除标签
+    *onDeleteTag({ payload }, { call, put }) {
+      return yield call(onDeleteTag, { ...payload });
     },
 
     // 暂存

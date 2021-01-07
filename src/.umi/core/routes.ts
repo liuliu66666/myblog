@@ -11,6 +11,16 @@ export function getRoutes() {
     "component": require('@/layouts/index.jsx').default,
     "routes": [
       {
+        "path": "/404",
+        "exact": true,
+        "component": require('@/pages/404.jsx').default
+      },
+      {
+        "path": "/about",
+        "exact": true,
+        "component": require('@/pages/about/index.jsx').default
+      },
+      {
         "path": "/admin/articlelist/ArtCard",
         "exact": true,
         "component": require('@/pages/admin/articlelist/ArtCard.jsx').default
@@ -19,6 +29,11 @@ export function getRoutes() {
         "path": "/admin/articlelist",
         "exact": true,
         "component": require('@/pages/admin/articlelist/index.jsx').default
+      },
+      {
+        "path": "/admin/configure",
+        "exact": true,
+        "component": require('@/pages/admin/configure/index.jsx').default
       },
       {
         "path": "/admin",
@@ -49,6 +64,9 @@ export function getRoutes() {
         "path": "/login",
         "exact": true,
         "component": require('@/pages/login/index.jsx').default
+      },
+      {
+        "component": require('@/pages/404.jsx').default
       }
     ]
   }

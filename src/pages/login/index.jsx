@@ -24,24 +24,25 @@ const Login = ({ dispatch, logining }) => {
     <div className={styles.loginBox}>
       <Spin spinning={!!logining}>
         <div className={styles.formBox}>
+          <h2>帐户登录</h2>
           <Form name="basic" onFinish={onFinish}>
             <Form.Item
-              label="账号"
+              label=""
               name="username"
               rules={[{ required: true, message: "请输入账号!" }]}
             >
-              <Input autoComplete="off"  />
+              <Input autoComplete="off" />
             </Form.Item>
 
             <Form.Item
-              label="密码"
+              label=""
               name="password"
               rules={[{ required: true, message: "请输入密码!" }]}
             >
-              <Input.Password autoComplete="off"  />
+              <Input.Password autoComplete="off" />
             </Form.Item>
             <Form.Item style={{ textAlign: "right" }}>
-              <Button type="primary" htmlType="submit">
+              <Button block type="primary" htmlType="submit" shape="round">
                 登录
               </Button>
             </Form.Item>

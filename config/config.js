@@ -13,6 +13,7 @@ export default {
   theme: {
     "@primary-color": "#1DA57A",
   },
+  plugins: ["./plugins/404"],
   proxy: {
     "/api": {
       target: "http://172.18.19.83:5000",

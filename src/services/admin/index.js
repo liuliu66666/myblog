@@ -15,6 +15,13 @@ export async function getTags() {
   return request(`/api/article/tags`);
 }
 
+// 删除标签
+export async function onDeleteTag({ id }) {
+  return request(`/api/article/tags?id=${id}`, {
+    method: "DELETE",
+  });
+}
+
 // 新增标签
 export async function onAddTags(params) {
   return request(`/api/article/tags`, {

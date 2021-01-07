@@ -2,6 +2,7 @@ import {
   BankOutlined,
   UnorderedListOutlined,
   FormOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 
 const adminMenu = [
@@ -22,6 +23,12 @@ const adminMenu = [
     title: "写文章",
     icon: <FormOutlined />,
     path: "/admin/write",
+  },
+  {
+    id: 4,
+    title: "配置",
+    icon: <SettingOutlined />,
+    path: "/admin/configure",
   },
 ];
 
