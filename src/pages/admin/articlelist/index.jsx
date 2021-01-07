@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Space, Divider, Modal, message, Result, Spin, Skeleton } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import QueueAnim from 'rc-queue-anim';
 import { connect } from "dva";
 import { history } from "umi";
 import moment from "moment";
